@@ -13,4 +13,4 @@ COPY . /usr/src/app
 RUN npm install
 
 # Build and run the app
-CMD npm start serve
+CMD npm start
