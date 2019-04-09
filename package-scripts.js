@@ -22,14 +22,14 @@ module.exports = {
                 script: series(
                     'nps banner.serve',
                     'apidoc -i src -o src/public/apidoc',
-                    'nodemon --watch src --watch .env --inspect'
+                    'node --watch src --watch .env --inspect'
                 ),
                 description: 'Serves the current app and watches for changes to restart it, you may attach inspector to it.'
             },
             script: series(
                 'nps banner.serve',
                 'apidoc -i src -o src/public/apidoc',
-                'nodemon --watch src --watch .env'
+                'node --watch src --watch .env'
             ),
             description: 'Serves the current app and watches for changes to restart it'
         },
