@@ -114,13 +114,12 @@ let S3Service = class S3Service {
                 if (err) {
                     reject(err);
                 }
-                console.log(data);
                 const gm = require('gm').subClass({ imageMagick: true });
-                return gm(data.Body)
+                return gm(data)
                     .resize(widthString, heightString)
                     .toBuffer((error, buffer) => {
                     if (error) {
-                        throw error;
+                        reject(error);
                     }
                     else {
                         console.log('Buffer' + Buffer.isBuffer(buffer));

@@ -47,6 +47,10 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Number)
 ], Manufacturer.prototype, "sortOrder", void 0);
 tslib_1.__decorate([
+    typeorm_1.Column({ name: 'vendor' }),
+    tslib_1.__metadata("design:type", String)
+], Manufacturer.prototype, "vendor", void 0);
+tslib_1.__decorate([
     typeorm_1.Column({ name: 'is_active' }),
     tslib_1.__metadata("design:type", Number)
 ], Manufacturer.prototype, "isActive", void 0);

@@ -226,6 +226,7 @@ let ProductController = class ProductController {
             newProduct.manufacturerId = product.model;
             newProduct.isActive = product.status;
             newProduct.sortOrder = product.sortOrder;
+            newProduct.uniquecode = product.uniquecode;
             const saveProduct = yield this.productService.create(newProduct);
             // save category
             if (product.categoryId) {

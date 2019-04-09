@@ -4,7 +4,7 @@
     "description": "BuilderBase RESTFUL API",
     "main": "src/app.ts",
     "scripts": {
-        "start": "npm i nps",
+        "start": "npm i nps start nps",
         "test": "npm start test",
         "build": "npm start build",
         "presetup": "npm install",

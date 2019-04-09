@@ -18,6 +18,8 @@ const AWS = tslib_1.__importStar(require("aws-sdk"));
 const env_1 = require("../../env");
 const forgotPasswordRequest_1 = require("./requests/forgotPasswordRequest");
 const userLoginRequest_1 = require("./requests/userLoginRequest");
+const manufacturerModel_1 = require("../models/manufacturerModel");
+const manufacturerService_1 = require("../services/manufacturerService");
 const createUserRequest_1 = require("./requests/createUserRequest");
 const UpdateUserRequest_1 = require("./requests/UpdateUserRequest");
 const User_1 = require("../models/User");
@@ -29,9 +31,10 @@ const ChangePasswordRequest_1 = require("./requests/ChangePasswordRequest");
 const editProfileRequest_1 = require("./requests/editProfileRequest");
 const accessTokenService_1 = require("../services/accessTokenService");
 let UserController = class UserController {
-    constructor(userService, userGroupService, accessTokenService) {
+    constructor(userService, userGroupService, manufacturerService, accessTokenService) {
         this.userService = userService;
         this.userGroupService = userGroupService;
+        this.manufacturerService = manufacturerService;
         this.accessTokenService = accessTokenService;
     }
     // Login API
@@ -62,7 +65,7 @@ let UserController = class UserController {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             console.log(loginParam.username);
             console.log(loginParam.password);
-            // console.log('hi');
+            console.log('hi');
             const user = yield this.userService.findOne({
                 where: {
                     username: loginParam.username,
@@ -187,6 +190,7 @@ let UserController = class UserController {
                 const errorResponse = {
                     status: 0,
                     message: 'Invalid userGroupId',
+                    statusCode: 'GROUPID_DOES_NOT_EXIST',
                 };
                 return response.status(400).send(errorResponse);
             }
@@ -199,7 +203,8 @@ let UserController = class UserController {
             if (user) {
                 const errorResponse = {
                     status: 0,
-                    message: 'this user already saved',
+                    message: 'Someome already registered with this email',
+                    statusCode: 'USER_REGISTER_ALREADY',
                 };
                 return response.status(400).send(errorResponse);
             }
@@ -216,10 +221,19 @@ let UserController = class UserController {
             newUserParams.isActive = 1;
             const userSaveResponse = yield this.userService.create(newUserParams);
             if (userSaveResponse) {
+                const newManufacturer = new manufacturerModel_1.Manufacturer();
+                newManufacturer.name = createParam.firstName;
+                newManufacturer.imagePath = 'manufacturer/';
+                newManufacturer.sortOrder = 1;
+                newManufacturer.isActive = 1;
+                newManufacturer.vendor = createParam.email;
+                const manufacturerSave = yield this.manufacturerService.create(newManufacturer);
+                console.log('manufacturer' + manufacturerSave);
                 const successResponse = {
                     status: 1,
                     message: 'User saved successfully',
                     data: userSaveResponse,
+                    statusCode: 'USER_REGISTER_COMPLETE',
                 };
                 return response.status(200).send(successResponse);
             }
@@ -585,6 +599,23 @@ let UserController = class UserController {
             }
         });
     }
+    getProfile(response, request) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const seller = yield this.userService.findOne({
+                where: {
+                    userId: request.user.userId,
+                },
+            });
+            if (seller) {
+                const successResponse = {
+                    status: 1,
+                    message: 'Successfully got Seller profile',
+                    data: seller,
+                };
+                return response.status(200).send(successResponse);
+            }
+        });
+    }
 };
 tslib_1.__decorate([
     routing_controllers_1.Post('/login'),
@@ -602,8 +633,9 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", Promise)
 ], UserController.prototype, "findAll", null);
 tslib_1.__decorate([
-    routing_controllers_1.Post('/create-user'),
-    routing_controllers_1.Authorized(),
+    routing_controllers_1.Post('/create-user')
+    // @Authorized()
+    ,
     tslib_1.__param(0, routing_controllers_1.Body({ validate: true })), tslib_1.__param(1, routing_controllers_1.Res()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [createUserRequest_1.CreateUser, Object]),
@@ -655,10 +687,19 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [editProfileRequest_1.EditProfileRequest, Object, Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], UserController.prototype, "editProfile", null);
+tslib_1.__decorate([
+    routing_controllers_1.Get('/get-profile'),
+    routing_controllers_1.Authorized(),
+    tslib_1.__param(0, routing_controllers_1.Res()), tslib_1.__param(1, routing_controllers_1.Req()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", Promise)
+], UserController.prototype, "getProfile", null);
 UserController = tslib_1.__decorate([
     routing_controllers_1.JsonController('/auth'),
     tslib_1.__metadata("design:paramtypes", [UserService_1.UserService,
         UserGroupService_1.UserGroupService,
+        manufacturerService_1.ManufacturerService,
         accessTokenService_1.AccessTokenService])
 ], UserController);
 exports.UserController = UserController;

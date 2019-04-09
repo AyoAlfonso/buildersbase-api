@@ -35,7 +35,7 @@ export const env = {
         host: getOsEnv('APP_HOST'),
         schema: getOsEnv('APP_SCHEMA'),
         routePrefix: getOsEnv('APP_ROUTE_PREFIX'),
-        port: normalizePort(process.env.PORT || getOsEnv('APP_PORT')),
+        port: normalizePort(process.env.PORT),
         banner: toBool(getOsEnv('APP_BANNER')),
         dirs: {
             migrations: getOsPaths('TYPEORM_MIGRATIONS'),

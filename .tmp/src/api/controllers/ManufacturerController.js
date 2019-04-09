@@ -58,44 +58,44 @@ let ManufacturerController = class ManufacturerController {
      */
     createManufacturer(manufacturer, request, response) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
-            const image = manufacturer.image;
-            if (image) {
-                const s3 = new AWS.S3();
-                const path = 'manufacturer/';
-                const base64Data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-                const type = image.split(';')[0].split('/')[1];
-                const name = 'Img_' + Date.now() + '.' + type;
-                const params = {
-                    Bucket: env_1.aws_setup.AWS_BUCKET,
-                    Key: 'manufacturer/' + name,
-                    Body: base64Data,
-                    ACL: 'public-read',
-                    ContentEncoding: 'base64',
-                    ContentType: `image/${type}`,
-                };
-                console.log(manufacturer);
-                const newManufacturer = new manufacturerModel_1.Manufacturer();
-                newManufacturer.name = manufacturer.name;
-                newManufacturer.image = name;
-                newManufacturer.imagePath = path;
-                newManufacturer.sortOrder = manufacturer.sortOrder;
-                newManufacturer.isActive = manufacturer.status;
-                const manufacturerSave = yield this.manufacturerService.create(newManufacturer);
-                s3.upload(params, (err, data) => {
-                    if (err) {
-                        console.log(err);
-                    }
-                    console.log(data);
-                });
-                console.log('manufacturer' + manufacturerSave);
-                console.log('Image successfully uploaded.');
-                const successResponse = {
-                    status: 1,
-                    message: 'Successfully created a new manufacturer.',
-                    data: { name, path },
-                };
-                return response.status(200).send(successResponse);
-            }
+            // const image = manufacturer.image;
+            // if (image) {
+            //     const s3 = new AWS.S3();
+            const path = 'manufacturer/';
+            //     const base64Data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+            //     const type = image.split(';')[0].split('/')[1];
+            //     const name = 'Img_' + Date.now() + '.' + type;
+            //     const params = {
+            //         Bucket: aws_setup.AWS_BUCKET,
+            //         Key:  'manufacturer/' + name,
+            //         Body: base64Data,
+            //         ACL: 'public-read',
+            //         ContentEncoding: 'base64',
+            //         ContentType: `image/${type}`,
+            //     };
+            console.log(manufacturer);
+            const newManufacturer = new manufacturerModel_1.Manufacturer();
+            // newManufacturer.name = manufacturer.name;
+            newManufacturer.image = name;
+            newManufacturer.imagePath = path;
+            newManufacturer.sortOrder = manufacturer.sortOrder;
+            newManufacturer.isActive = manufacturer.status;
+            newManufacturer.vendor = manufacturer.vendor;
+            const manufacturerSave = yield this.manufacturerService.create(newManufacturer);
+            // s3.upload(params, (err, data) => {
+            //     if (err) {
+            //         console.log(err);
+            //     }
+            //     console.log(data);
+            // });
+            console.log('manufacturer' + manufacturerSave);
+            console.log('Image successfully uploaded.');
+            const successResponse = {
+                status: 1,
+                message: 'Successfully created a new manufacturer.',
+                data: { name },
+            };
+            return response.status(200).send(successResponse);
         });
     }
     // Manufacturer List API

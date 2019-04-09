@@ -61,6 +61,7 @@ let CustomerController = class CustomerController {
     register(registerParam, request, response) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             const newUser = new Customer_1.Customer();
+            console.log(`Request is coming in: ${registerParam}`);
             newUser.firstName = registerParam.name;
             newUser.password = yield Customer_1.Customer.hashPassword(registerParam.password);
             newUser.email = registerParam.emailId;
@@ -187,6 +188,7 @@ let CustomerController = class CustomerController {
     login(loginParam, request, response) {
         return tslib_1.__awaiter(this, void 0, void 0, function* () {
             // select:['id','firstName','email','mobileNumber','avatar', 'avatarPath'],
+            console.log(`Request is coming in: ${loginParam}`);
             const resultData = yield this.customerService.findOne({
                 select: ['id', 'firstName', 'email', 'mobileNumber', 'password', 'avatar', 'avatarPath'],
                 where: { email: loginParam.emailId },
@@ -195,7 +197,7 @@ let CustomerController = class CustomerController {
             if (!resultData) {
                 const errorUserNameResponse = {
                     status: 0,
-                    message: 'Invalid EmailId',
+                    message: 'Invalid Email',
                 };
                 return response.status(400).send(errorUserNameResponse);
             }

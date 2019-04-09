@@ -31,25 +31,29 @@ let ErrorHandlerMiddleware = class ErrorHandlerMiddleware {
     error(error, _req, res, _next) {
         const responseObject = {};
         // if its an array of ValidationError
-        // console.log(error);
+        console.log(error.errors);
         // console.log(Array.isArray(error));
         if (error && Array.isArray(error.errors) && error.errors.every((element) => element instanceof class_validator_1.ValidationError)) {
-            res.status(422);
             console.log('Inside');
             responseObject.message = "You have an error in your request's body. Check 'errors' field for more details!";
             // responseObject.errors = error;
             responseObject.status = 0;
             responseObject.data = {};
             responseObject.data.message = [];
+            let messageError;
             error.errors.forEach((element) => {
                 Object.keys(element.constraints).forEach((type) => {
                     responseObject.data.message.push(`property ${element.constraints[type]}`);
+                    messageError = `${element.constraints[type]}`;
                 });
             });
+            res.status(422)
+                .json({ message: messageError });
         }
         else {
             // set http status
             if (error instanceof routing_controllers_1.HttpError && error.httpCode) {
+                console.log('Https Error' + error);
                 res.status(error.httpCode);
             }
             else {
@@ -78,13 +82,16 @@ let ErrorHandlerMiddleware = class ErrorHandlerMiddleware {
             }
         }
         if (this.isProduction) {
+            console.log('Https Production Error' + error);
             this.log.error(error.name, error.message);
         }
         else {
+            console.log('Https Development Error' + error);
             this.log.error(error.name, error.stack);
+            res.status(422).json({ error: error.name });
         }
         // send json only with error
-        res.json(responseObject);
+        // res.json(responseObject);
     }
 };
 ErrorHandlerMiddleware = tslib_1.__decorate([

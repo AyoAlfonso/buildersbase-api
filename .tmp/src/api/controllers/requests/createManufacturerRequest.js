@@ -23,12 +23,12 @@ tslib_1.__decorate([
 ], CreateManufacturer.prototype, "name", void 0);
 tslib_1.__decorate([
     class_validator_1.IsNotEmpty(),
-    tslib_1.__metadata("design:type", String)
-], CreateManufacturer.prototype, "image", void 0);
-tslib_1.__decorate([
-    class_validator_1.IsNotEmpty(),
     tslib_1.__metadata("design:type", Number)
 ], CreateManufacturer.prototype, "sortOrder", void 0);
+tslib_1.__decorate([
+    class_validator_1.IsNotEmpty(),
+    tslib_1.__metadata("design:type", String)
+], CreateManufacturer.prototype, "vendor", void 0);
 tslib_1.__decorate([
     class_validator_1.IsNotEmpty(),
     tslib_1.__metadata("design:type", Number)
