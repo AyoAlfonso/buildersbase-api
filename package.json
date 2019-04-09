@@ -32,7 +32,7 @@
     "apidoc": "^0.17.7",
     "array-to-tree": "^3.3.0",
     "aws-sdk": "^2.428.0",
-    "bcrypt": "^3.0.2",
+    "bcrypt": "^3.0.5",
     "chalk": "^2.4.1",
     "class-validator": "^0.8.1",
     "commander": "^2.19.0",
