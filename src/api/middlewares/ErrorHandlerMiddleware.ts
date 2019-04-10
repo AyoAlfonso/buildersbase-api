@@ -93,7 +93,7 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
         } else {
             console.log('Https Development Error' + error);
             this.log.error(error.name, error.stack);
-          res.status(422).json({ error: error.name});
+          res.status(422).json({ message: error.name});
         }
         // send json only with error
         // res.json(responseObject);
