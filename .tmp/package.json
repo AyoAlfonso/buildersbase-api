@@ -19,10 +19,10 @@
         "express"
     ],
     "apidoc": {
-        "name": "SpurtCommerce",
+        "name": "Buildersbase",
         "version": "1.5.0",
         "description": "Builders Base RESTFUL API Document",
-        "title": "SpurtCommerce RESTFUL API Document",
+        "title": "Buildersbase RESTFUL API Document",
         "url": "http://localhost:8000",
         "sampleUrl": "http://localhost:8000"
     },

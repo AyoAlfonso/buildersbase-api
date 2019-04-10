@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 /*
- * SpurtCommerce API
+ * Buildersbase API
  * version 2.0.0
- * http://api.spurtcommerce.com
+ * http://api.buildersbase.com
  *
  * Copyright (c) 2019 PICCOSOFT
- * Author piccosoft <support@spurtcommerce.com>
+ * Author piccosoft <support@Buildersbase.com>
  * Licensed under the MIT license.
  */
 const dotenv = tslib_1.__importStar(require("dotenv"));

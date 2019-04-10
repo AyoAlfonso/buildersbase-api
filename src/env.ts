@@ -1,10 +1,10 @@
 /*
- * SpurtCommerce API
+ * Buildersbase API
  * version 2.0.0
- * http://api.spurtcommerce.com
+ * http://api.buildersbase.com
  *
  * Copyright (c) 2019 PICCOSOFT
- * Author piccosoft <support@spurtcommerce.com>
+ * Author piccosoft <support@Buildersbase.com>
  * Licensed under the MIT license.
  */
 import * as dotenv from 'dotenv';
