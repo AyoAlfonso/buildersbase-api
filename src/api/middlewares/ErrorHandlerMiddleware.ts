@@ -60,7 +60,7 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
                 console.log('Https Error' + error);
                 res.status(error.httpCode);   return;
             } else {
-                res.status(500); 
+                res.status(500);
                 return;
             }
 
