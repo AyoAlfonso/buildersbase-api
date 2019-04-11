@@ -298,6 +298,105 @@ export class CommonListController {
         return response.status(200).send(successResponse);
     }
 
+    // Seller Product List API
+    /**
+     * @api {get} /api/list/sellerProductList Product List API
+     * @apiGroup Store List
+     * @apiHeader {String} Authorization
+     * @apiParam (Request body) {Number} limit limit
+     * @apiParam (Request body) {Number} offset offset
+     * @apiParam (Request body) {String} manufacturerId manufacturerId
+     * @apiParam (Request body) {String} categoryId categoryId
+     * @apiParam (Request body) {String} priceFrom price from you want to list
+     * @apiParam (Request body) {String} priceTo price to you want to list
+     * @apiParam (Request body) {Number} price orderBy 0->desc 1->asc
+     * @apiParam (Request body) {Number} condition  1->new 2->used
+     * @apiParam (Request body) {String} keyword keyword
+     * @apiParam (Request body) {String} count count in boolean or number
+     * @apiSuccessExample {json} Success
+     * HTTP/1.1 200 OK
+     * {
+     *      "status": "1"
+     *      "message": "Successfully get product list",
+     *      "data":"{}"
+     * }
+     * @apiSampleRequest /api/list/productlist
+     * @apiErrorExample {json} productList error
+     * HTTP/1.1 500 Internal Server Error
+     */
+    @Get('/sellerProductlist')
+    public async sellerProductList( @QueryParam('limit') limit: number, @QueryParam('offset') offset: number, @QueryParam('keyword') keyword: string,
+                                    @QueryParam('manufacturerId') manufacturerId: string, @QueryParam('categoryId') categoryId: string,
+                                    @QueryParam('priceFrom') priceFrom: string, @QueryParam('priceTo') priceTo: string, @QueryParam('price') price: number,
+                                    @QueryParam('condition') condition: number, @QueryParam('count') count: number | boolean, @Req() request: any, @Res() response: any): Promise<any> {
+        console.log(keyword);
+        const select = ['product.productId', 'product.sku', 'product.name', 'product.quantity', 'product.description', 'product.price',
+            'product.isActive AS isActive', 'product.manufacturerId AS manufacturerId', 'product.location AS location', 'product.minimumQuantity AS minimumQuantity',
+            'product.subtractStock', 'product.wishListStatus', 'product.stockStatusId', 'product.shipping', 'product.sortOrder', 'product.condition',
+            'product.dateAvailable', 'product.amount', 'product.metaTagTitle', 'product.metaTagDescription', 'product.metaTagKeyword', 'product.discount', 'product.uniquecode'];
+        const searchConditions = [
+            {
+                name: 'product.manufacturerId',
+                op: 'and',
+                value: manufacturerId,
+            },
+        ];
+
+        const whereConditions: any = [{
+            name: 'product.productId',
+            op: 'inraw',
+            value: categoryId,
+        }];
+
+        const productList: any = await this.productService.productList(limit, offset, select, searchConditions, whereConditions, categoryId, priceFrom, priceTo, price, count);
+        console.log(productList);
+        if (count) {
+            const Response: any = {
+                status: 1,
+                message: 'Successfully got Products count',
+                data: productList,
+            };
+            return response.status(200).send(Response);
+        }
+        const promises = productList.map(async (result: any) => {
+            const productImage = await this.productImageService.findAll({
+                select: ['productId', 'image', 'containerName'],
+                where: {productId: result.productId},
+            });
+            const temp: any = result;
+            temp.Images = productImage;
+            if (request.header('authorization')) {
+                const userId = jwt.verify(request.header('authorization').split(' ')[1], '123##$$)(***&');
+                const userUniqueId: any = Object.keys(userId).map((key: any) => {
+                    return [(key), userId[key]];
+                });
+                console.log( userUniqueId[0][1]);
+                const wishStatus = await this.customerWishlistService.findOne({
+                    where: {
+                        productId: result.productId,
+                        customerId: userUniqueId[0][1] ,
+                    } ,
+                });
+                if (wishStatus) {
+                    result.wishListStatus = 1;
+                    await this.productService.create(result);
+                }
+            } else {
+                result.wishListStatus = 0;
+                await this.productService.create(result);
+            }
+            return temp;
+        });
+        const finalResult = await Promise.all(promises);
+
+        const successResponse: any = {
+            status: 1,
+            message: 'Successfully got the complete list of products. ',
+            data: finalResult,
+        };
+        return response.status(200).send(successResponse);
+    }
+
     // Related Product Showing API
     /**
      * @api {get} /api/list/related-product-list Related Product List

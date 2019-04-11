@@ -69,6 +69,9 @@ export class AddProductRequest {
     public uniquecode: string;
 
     @IsNotEmpty()
+    public manufactureId: number;
+
+    @IsNotEmpty()
     public sortOrder: number;
 
 }

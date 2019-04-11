@@ -229,7 +229,7 @@ export class ProductController {
         newProduct.dateAvailable = product.dateAvailable;
         newProduct.metaTagTitle = product.metaTagTitle;
         newProduct.condition = product.condition;
-        newProduct.manufacturerId = product.model;
+        newProduct.manufacturerId = product.manufactureId;
         newProduct.isActive = product.status;
         newProduct.sortOrder = product.sortOrder;
         newProduct.uniquecode = product.uniquecode;

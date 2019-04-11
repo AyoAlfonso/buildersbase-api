@@ -86,6 +86,68 @@ export class ProductController {
         return response.status(200).send(successResponse);
     }
 
+    // Product Details API
+    /**
+     * @api {get} /api/product-store/sellerproducts/:sellerid Sellers product Detail API
+     * @apiGroup Store
+     * @apiSuccessExample {json} Success
+     * HTTP/1.1 200 OK
+     * {
+     *      "status": "1"
+     *      "message": "Successfully get seller detail ",
+     *      "data":"{}"
+     * }
+     * @apiSampleRequest /api/product-store/sellerproducts/:sellerid
+     * @apiErrorExample {json} productDetail error
+     * HTTP/1.1 500 Internal Server Error
+     */
+    @Get('/sellerproducts/:sellerid')
+    public async sellerPoducts(@Param('sellerid') sellerId: number, @Res() response: any): Promise<any> {
+        const select = ['productId', 'sku', 'upc', 'name', 'description', 'location', 'minimumQuantity', 'quantity', 'subtractStock', 'metaTagTitle', 'manufacturerId', 'stockStatusId', 'shipping', 'dateAvailable', 'sortOrder', 'price', 'isActive'];
+
+        const relation = ['productImage'];
+
+        const WhereConditions = [
+            {
+                name: 'manufacturerId',
+                op: 'where',
+                value: sellerId,
+            },
+        ];
+
+        const productDetail: any = await this.productService.list(0, 0, select, relation, WhereConditions, 0, 0, 0);
+        const productDetails: any = classToPlain(productDetail);
+        const promises = productDetails.map(async (result: any) => {
+            const productToCategory = await this.productToCategoryService.findAll({
+                select: ['categoryId', 'productId'],
+                where: {productId: result.productId},
+            }).then((val) => {
+                const category = val.map(async (value: any) => {
+                    const categoryNames = await this.categoryService.findOne({categoryId: value.categoryId});
+                    const JsonData = JSON.stringify(categoryNames);
+                    const ParseData = JSON.parse(JsonData);
+                    const temp: any = value;
+                    temp.categoryName = ParseData.name;
+                    return temp;
+                });
+
+                const results = Promise.all(category);
+                return results;
+            });
+            const dd: any = result;
+            dd.Category = productToCategory;
+            console.log('dd' + dd);
+            return dd;
+        });
+        // wait until all promises resolve
+        const finalResult = await Promise.all(promises);
+        const successResponse: any = {
+            status: 1,
+            message: 'Successfully get productDetail',
+            data: finalResult,
+        };
+        return response.status(200).send(successResponse);
+    }
     // update Feature Product API
     /**
      * @api {put} /api/product-store/update-featureproduct/:id Update Feature Product API
