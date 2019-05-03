@@ -185,7 +185,7 @@ export class CustomerController {
     @Post('/login')
     public async login(@Body({validate: true}) loginParam: CustomerLogin, @Req() request: any, @Res() response: any): Promise<any> {
         // select:['id','firstName','email','mobileNumber','avatar', 'avatarPath'],
-        console.log(`Request is coming in: ${loginParam}`);
+        console.log(`Request is coming in: ${loginParam.password}`);
         const resultData = await this.customerService.findOne({
             select: ['id', 'firstName', 'email', 'mobileNumber', 'password', 'avatar', 'avatarPath'],
             where: {email: loginParam.emailId},

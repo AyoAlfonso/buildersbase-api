@@ -103,7 +103,6 @@ export class UserController {
           return response.status(400).send(errorResponse);
       }
     } else {
-
           const errorResponse: any = {
                 status: 0,
                 message: 'Invalid username',
