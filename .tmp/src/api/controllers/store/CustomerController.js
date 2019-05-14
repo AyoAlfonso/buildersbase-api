@@ -199,7 +199,7 @@ let CustomerController = class CustomerController {
                     status: 0,
                     message: 'Invalid Email',
                 };
-                return response.status(400).send(errorUserNameResponse);
+                return response.status(201).send(errorUserNameResponse);
             }
             if (yield Customer_1.Customer.comparePassword(resultData, loginParam.password)) {
                 // create a token
