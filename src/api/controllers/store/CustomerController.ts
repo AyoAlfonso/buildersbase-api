@@ -196,7 +196,7 @@ export class CustomerController {
                 status: 0,
                 message: 'Invalid Email',
             };
-            return response.status(400).send(errorUserNameResponse);
+            return response.status(201).send(errorUserNameResponse);
         }
         if (await Customer.comparePassword(resultData, loginParam.password)) {
             // create a token
@@ -237,7 +237,7 @@ export class CustomerController {
             status: 0,
             message: 'Invalid password',
         };
-        return response.status(400).send(errorResponse);
+        return response.status(201).send(errorResponse);
     }
 
     // Change Password API
