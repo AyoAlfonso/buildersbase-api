@@ -237,7 +237,7 @@ let CustomerController = class CustomerController {
                 status: 0,
                 message: 'Invalid password',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         });
     }
     // Change Password API
