@@ -27,11 +27,11 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
          * We could have also use useExpressServer here to attach controllers to an existing express instance.
          */
         const app = express();
-        app.all('*', (req, res, next) => {
+        app.use('*', (req, res, next) => {
+            // console.log( req.headers.origin[0]);
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'X-Requested-With');
             res.header('Access-Control-Allow-Headers', 'Content-Type');
-            // console.log(res);
             next();
         });
         app.use(bodyParser.urlencoded({extended: true}));

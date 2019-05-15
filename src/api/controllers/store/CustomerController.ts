@@ -97,7 +97,7 @@ export class CustomerController {
                     message: 'Registration successful, but unable to send email. ',
                     statusCode: 'EMAIL_UNSENT',
                 };
-                return response.status(400).send(errorResponse);
+                return response.status(201).send(errorResponse);
             }
         }
         const errorPasswordResponse: any = {
@@ -105,7 +105,7 @@ export class CustomerController {
             message: 'A mismatch between password and confirm password. ',
             statusCode: 'PASSWORD_MISMATCH',
         };
-        return response.status(400).send(errorPasswordResponse);
+        return response.status(201).send(errorPasswordResponse);
     }
 
     // Forgot Password API
@@ -196,7 +196,7 @@ export class CustomerController {
                 status: 0,
                 message: 'Invalid Email',
             };
-            return response.status(400).send(errorUserNameResponse);
+            return response.status(201).send(errorUserNameResponse);
         }
         if (await Customer.comparePassword(resultData, loginParam.password)) {
             // create a token
@@ -237,7 +237,7 @@ export class CustomerController {
             status: 0,
             message: 'Invalid password',
         };
-        return response.status(400).send(errorResponse);
+        return response.status(201).send(errorResponse);
     }
 
     // Change Password API
