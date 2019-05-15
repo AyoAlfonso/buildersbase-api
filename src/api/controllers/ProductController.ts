@@ -127,7 +127,7 @@ export class ProductController {
                 status: 0,
                 message: 'Invalid productId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteProduct = await this.productService.delete(productDelete.productId);
@@ -143,7 +143,7 @@ export class ProductController {
                 status: 0,
                 message: 'unable to delete product',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -273,7 +273,7 @@ export class ProductController {
                 status: 1,
                 message: 'unable to create Product',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
     }
@@ -356,7 +356,7 @@ export class ProductController {
                 status: 0,
                 message: 'Invalid productId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         updateProduct.name = product.productName;
         updateProduct.description = product.productDescription;
@@ -421,7 +421,7 @@ export class ProductController {
                 status: 1,
                 message: 'unable to updated Product',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
     }

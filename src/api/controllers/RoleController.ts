@@ -62,7 +62,7 @@ export class RoleController {
                 status: 0,
                 message: 'this role already exist',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const newRoleParams: any = new UserGroup();
@@ -81,7 +81,7 @@ export class RoleController {
                 status: 0,
                 message: 'unable to save Role',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
     }
@@ -124,7 +124,7 @@ export class RoleController {
                 status: 0,
                 message: 'Invalid roleId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const newRoleParams: any = new UserGroup();
@@ -143,7 +143,7 @@ export class RoleController {
                 status: 0,
                 message: 'unable to update Role',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
     }
@@ -223,7 +223,7 @@ export class RoleController {
                 status: 0,
                 message: 'Invalid roleId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteRole = await this.userGroupService.delete(role.groupId);
@@ -239,7 +239,7 @@ export class RoleController {
                 status: 0,
                 message: 'unable to delete role',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

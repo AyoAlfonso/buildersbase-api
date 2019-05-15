@@ -74,7 +74,7 @@ export class StockStatusController {
                 status: 0,
                 message: 'unable to create StockStatus',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -114,7 +114,7 @@ export class StockStatusController {
                 status: 0,
                 message: 'Invalid stockStatus',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         stockStatus.name = stockStatusParams.name;
         stockStatus.isActive = stockStatusParams.status;
@@ -131,7 +131,7 @@ export class StockStatusController {
                 status: 1,
                 message: 'unable to update stockStatus',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -181,7 +181,7 @@ export class StockStatusController {
                 status: 1,
                 message: 'unable to get stockStatusList',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -218,7 +218,7 @@ export class StockStatusController {
                 status: 0,
                 message: 'Invalid stockStatusId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteStockStatus = await this.stockStatusService.delete(stockStatus);
@@ -233,7 +233,7 @@ export class StockStatusController {
                 status: 0,
                 message: 'unable to delete stockStatus',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

@@ -160,7 +160,7 @@ export class CustomerOrderController {
                 status: 0,
                 message: 'Customer Mail does not send but Order Successfully',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 

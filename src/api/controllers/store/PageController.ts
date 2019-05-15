@@ -68,7 +68,7 @@ export class PageController {
                 status: 0,
                 message: 'unable to list pages',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -104,7 +104,7 @@ export class PageController {
                 status: 0,
                 message: 'invalid page id',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const pageDetails = await this.pageService.findOne(page);
@@ -120,7 +120,7 @@ export class PageController {
                 status: 0,
                 message: 'unable to get page Details',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

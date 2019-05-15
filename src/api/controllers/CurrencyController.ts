@@ -85,7 +85,7 @@ export class CurrencyController {
                 status: 0,
                 message: 'unable to create currency',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -140,7 +140,7 @@ export class CurrencyController {
                 status: 0,
                 message: 'unable to list currency',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -190,7 +190,7 @@ export class CurrencyController {
                 status: 0,
                 message: 'Invalid currencyId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         currency.title = currencyParam.title;
         currency.code = currencyParam.code;
@@ -211,7 +211,7 @@ export class CurrencyController {
                 status: 0,
                 message: 'unable to update currency',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -248,7 +248,7 @@ export class CurrencyController {
                 status: 0,
                 message: 'Invalid currencyId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteCurrency = await this.currencyService.delete(currency.currencyId);
@@ -263,7 +263,7 @@ export class CurrencyController {
                 status: 0,
                 message: 'unable to delete currency',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

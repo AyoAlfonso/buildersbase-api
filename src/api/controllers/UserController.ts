@@ -100,14 +100,14 @@ export class UserController {
           status: 0,
           message: 'Invalid password',
           };
-          return response.status(400).send(errorResponse);
+          return response.status(201).send(errorResponse);
       }
     } else {
           const errorResponse: any = {
                 status: 0,
                 message: 'Invalid username',
           };
-          return response.status(400).send(errorResponse);
+          return response.status(201).send(errorResponse);
     }
     }
 
@@ -193,7 +193,7 @@ export class UserController {
                 message: 'Invalid userGroupId',
                 statusCode: 'GROUPID_DOES_NOT_EXIST',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const user = await this.userService.findOne({
             where: {
@@ -207,7 +207,7 @@ export class UserController {
                 message: 'Someome already registered with this email',
                 statusCode: 'USER_REGISTER_ALREADY',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         // return this.userLoginService.find();
         console.log(createParam.password);
@@ -287,7 +287,7 @@ export class UserController {
                 status: 0,
                 message: 'Invalid userGroupId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         // return this.userLoginService.find();
         console.log(createParam.password);
@@ -314,7 +314,7 @@ export class UserController {
                 status: 0,
                 message: 'Unable to update user',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
     }
@@ -350,7 +350,7 @@ export class UserController {
                 status: 0,
                 message: 'Unable to delete user',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
     // forgot Password API
@@ -386,7 +386,7 @@ export class UserController {
                 status: 0,
                 message: 'Invalid email Id',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const tempPassword = Math.random().toString(36).substring(6);
         console.log(tempPassword);
@@ -408,7 +408,7 @@ export class UserController {
                 status: 0,
                 message: 'error in sending email',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -448,7 +448,7 @@ export class UserController {
                 status: 0,
                 message: 'Invalid userId',
             };
-            return response.status(400).send(errResponse);
+            return response.status(201).send(errResponse);
         }
         if (await User.comparePassword(user, changePasswordParam.oldPassword)) {
            const val = await User.comparePassword(user, changePasswordParam.newPassword);
@@ -457,7 +457,7 @@ export class UserController {
                    status: 0,
                    message: 'you are given a same password, please try different one',
                };
-               return response.status(400).send(errResponse);
+               return response.status(201).send(errResponse);
            }
             user.password = await User.hashPassword(changePasswordParam.newPassword);
             const updateUser = await this.userService.update(user.userId, user);
@@ -473,7 +473,7 @@ export class UserController {
             status: 0,
             message: 'Your old password is wrong',
         };
-        return response.status(400).send(errorResponse);
+        return response.status(201).send(errorResponse);
     }
 
     // Logout API
@@ -506,7 +506,7 @@ export class UserController {
                 status: 0,
                 message: 'Invalid token',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const deleteToken = await this.accessTokenService.delete(user);
         console.log('token' + deleteToken);
@@ -600,7 +600,7 @@ export class UserController {
                 status: 0,
                 message: 'unable to edit profile',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 

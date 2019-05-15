@@ -73,7 +73,7 @@ export class OrderStatusController {
                 status: 0,
                 message: 'unable to create OrderStatus',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -112,7 +112,7 @@ export class OrderStatusController {
                 status: 0,
                 message: 'Invalid orderStatusId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         orderStatus.name = orderStatusParams.name;
         orderStatus.isActive = orderStatusParams.status;
@@ -130,7 +130,7 @@ export class OrderStatusController {
                 status: 1,
                 message: 'unable to update OrderStatus.',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -181,7 +181,7 @@ export class OrderStatusController {
                 status: 1,
                 message: 'unable to get OrderStatus.',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -218,7 +218,7 @@ export class OrderStatusController {
                 status: 0,
                 message: 'Invalid orderStatusId.',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteOrderStatus = await this.orderStatusService.delete(orderStatus);
@@ -233,7 +233,7 @@ export class OrderStatusController {
                 status: 0,
                 message: 'unable to delete orderStatus.',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

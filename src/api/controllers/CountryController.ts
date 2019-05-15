@@ -94,7 +94,7 @@ export class CountryController {
                 status: 0,
                 message: 'Unable to add the country. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -154,7 +154,7 @@ export class CountryController {
                 status: 0,
                 message: 'Invalid countryId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         country.name = countryParam.name;
         country.isoCode2 = countryParam.isoCode2;
@@ -173,7 +173,7 @@ export class CountryController {
                 status: 0,
                 message: 'unable to update country',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -230,7 +230,7 @@ export class CountryController {
                 status: 0,
                 message: 'unable to get countryList',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -267,7 +267,7 @@ export class CountryController {
                 status: 0,
                 message: 'Invalid CountryId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const deleteCountry = await this.countryService.delete(country);
         if (deleteCountry) {
@@ -281,7 +281,7 @@ export class CountryController {
                 status: 0,
                 message: 'unable to delete country',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

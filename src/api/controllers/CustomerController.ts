@@ -148,7 +148,7 @@ export class CustomerController {
                 status: 0,
                 message: 'Password does not match.',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -267,7 +267,7 @@ export class CustomerController {
                 status: 0,
                 message: 'Invalid customerId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         customer.deleteFlag = 1;
         const deleteCustomer = await this.customerService.create(customer);
@@ -282,7 +282,7 @@ export class CustomerController {
                 status: 0,
                 message: 'unable to change delete flag status',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -340,7 +340,7 @@ export class CustomerController {
                 status: 0,
                 message: 'invalid customer id',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         if (customerParam.password === customerParam.confirmPassword) {
 
@@ -406,7 +406,7 @@ export class CustomerController {
                 status: 0,
                 message: 'Password does not match.',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -450,7 +450,7 @@ export class CustomerController {
                 status: 0,
                 message: 'invalid CustomerId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const customerDetails = await this.customerService.findOne(customer);
@@ -466,7 +466,7 @@ export class CustomerController {
                 status: 0,
                 message: 'unable to get customer Details',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 

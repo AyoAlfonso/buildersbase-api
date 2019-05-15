@@ -66,7 +66,7 @@ export class AddressController {
                 status: 0,
                 message: 'Invalid customerId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const newAddress = new Address();
         newAddress.customerId = addressParam.customerId;
@@ -90,7 +90,7 @@ export class AddressController {
                 status: 0,
                 message: 'Unable to create address. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -139,7 +139,7 @@ export class AddressController {
                 status: 0,
                 message: 'Invalid addressId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         address.address1 = addressParam.address1;
         address.address2 = addressParam.address2;
@@ -162,7 +162,7 @@ export class AddressController {
                 status: 1,
                 message: 'Unable to update the address. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -203,7 +203,7 @@ export class AddressController {
                 status: 1,
                 message: 'Unable to get the address list. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -240,7 +240,7 @@ export class AddressController {
                 status: 0,
                 message: 'Invalid addressId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteAddress = await this.addressService.delete(address);
@@ -255,7 +255,7 @@ export class AddressController {
                 status: 0,
                 message: 'Unable to delete the  address. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

@@ -110,7 +110,7 @@ export class BannerController {
                     status: 0,
                     message: 'Unable to create new banner. ',
                 };
-                return response.status(400).send(errorResponse);
+                return response.status(201).send(errorResponse);
             }
         }
     }
@@ -197,7 +197,7 @@ export class BannerController {
                 status: 0,
                 message: 'Invalid BannerId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteBanner = await this.bannerService.delete(banner);
@@ -213,7 +213,7 @@ export class BannerController {
                 status: 0,
                 message: 'unable to delete banner',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -261,7 +261,7 @@ export class BannerController {
                 status: 0,
                 message: 'Invalid BannerId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const image = bannerParam.image;
         if (image) {
@@ -307,7 +307,7 @@ export class BannerController {
                 status: 0,
                 message: 'Unable to update the banner list. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

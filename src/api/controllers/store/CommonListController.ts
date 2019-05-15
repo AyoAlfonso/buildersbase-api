@@ -547,7 +547,7 @@ export class CommonListController {
                 status: 0,
                 message: 'Mail does not send',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

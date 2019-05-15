@@ -67,7 +67,7 @@ export class EmailTemplateController {
                 status: 0,
                 message: 'unable to create emailTemplate',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -122,7 +122,7 @@ export class EmailTemplateController {
                 status: 0,
                 message: 'unable to list emailTemplate',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -166,7 +166,7 @@ export class EmailTemplateController {
                 status: 0,
                 message: 'Invalid emailTemplate Id',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         emailTemplate.title = emailTemplateParam.title;
         emailTemplate.subject = emailTemplateParam.subject;
@@ -185,7 +185,7 @@ export class EmailTemplateController {
                 status: 0,
                 message: 'unable to update emailTemplate',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -222,7 +222,7 @@ export class EmailTemplateController {
                 status: 0,
                 message: 'Invalid emailTemplate',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteEmailTemplate = await this.emailTemplateService.delete(emailTemplate);
@@ -237,7 +237,7 @@ export class EmailTemplateController {
                 status: 0,
                 message: 'unable to delete emailTemplate',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

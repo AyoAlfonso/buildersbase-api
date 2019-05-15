@@ -180,7 +180,7 @@ export class ProductController {
                 status: 0,
                 message: 'Invalid productId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         product.isFeature = updateFeatureProductParam.isFeature;
         const productSave = await this.productService.create(product);
@@ -196,7 +196,7 @@ export class ProductController {
                 status: 0,
                 message: 'unable to update product isFeature',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 

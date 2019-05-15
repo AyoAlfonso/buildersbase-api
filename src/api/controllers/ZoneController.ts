@@ -73,7 +73,7 @@ export class ZoneController {
                 status: 0,
                 message: 'Invalid countryId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const newZone = new Zone();
         newZone.countryId = zoneParam.countryId;
@@ -93,7 +93,7 @@ export class ZoneController {
                 status: 0,
                 message: 'unable to create zone',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -144,14 +144,14 @@ export class ZoneController {
                     status: 0,
                     message: 'Invalid countryId',
                 };
-                return response.status(400).send(errorResponse);
+                return response.status(201).send(errorResponse);
             }
         } else {
             const errorResponse: any = {
                 status: 0,
                 message: 'Invalid zoneId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         zone.countryId = zoneParam.countryId;
         zone.code = zoneParam.code;
@@ -170,7 +170,7 @@ export class ZoneController {
                 status: 0,
                 message: 'unable to update zone',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -226,7 +226,7 @@ export class ZoneController {
                 status: 1,
                 message: 'unable to get zone List',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -263,7 +263,7 @@ export class ZoneController {
                 status: 0,
                 message: 'Invalid zoneId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteZone = await this.zoneService.delete(zone);
@@ -279,7 +279,7 @@ export class ZoneController {
                 status: 0,
                 message: 'unable to delete zone',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

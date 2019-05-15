@@ -175,7 +175,7 @@ export class ManufacturerController {
                 status: 0,
                 message: 'Invalid manufacturerId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteManufacturer: any = await this.manufacturerService.delete(ManufacturerData.manufacturerId);
@@ -191,7 +191,7 @@ export class ManufacturerController {
                 status: 0,
                 message: 'unable to delete manufacturer',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -237,7 +237,7 @@ export class ManufacturerController {
                 status: 0,
                 message: 'Invalid manufacturerId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const image = manufacturerParam.image;
         if (image) {
@@ -282,7 +282,7 @@ export class ManufacturerController {
                 status: 0,
                 message: 'unable to update manufacturer',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

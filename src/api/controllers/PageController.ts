@@ -75,7 +75,7 @@ export class PageController {
                 status: 0,
                 message: 'unable to create page',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -132,7 +132,7 @@ export class PageController {
                 status: 0,
                 message: 'unable to list pages',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -182,7 +182,7 @@ export class PageController {
                 status: 0,
                 message: 'invalid page id',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         page.title = pageParam.title;
@@ -204,7 +204,7 @@ export class PageController {
                 status: 0,
                 message: 'unable to update page',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
     // Delete Page API
@@ -240,7 +240,7 @@ export class PageController {
                 status: 0,
                 message: 'Invalid pageId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const deletePage = await this.pageService.delete(page);
         if (deletePage) {
@@ -254,7 +254,7 @@ export class PageController {
                 status: 0,
                 message: 'unable to delete page',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

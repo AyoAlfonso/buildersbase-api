@@ -136,7 +136,7 @@ export class CustomerController {
                 status: 0,
                 message: 'Invalid Email Id',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         const tempPassword = Math.random().toString(36).substring(6);
         resultData.password = await Customer.hashPassword(tempPassword);
@@ -153,7 +153,7 @@ export class CustomerController {
                 status: 0,
                 message: 'Error in sending email, Invalid email. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -275,7 +275,7 @@ export class CustomerController {
                     status: 0,
                     message: 'you are given a same password, please try different one',
                 };
-                return response.status(400).send(errResponse);
+                return response.status(201).send(errResponse);
             }
             resultData.password = await Customer.hashPassword(changePasswordParam.newPassword);
             const updateUserData = await this.customerService.update(resultData.id, resultData);
@@ -291,7 +291,7 @@ export class CustomerController {
             status: 0,
             message: 'Your old password is wrong',
         };
-        return response.status(400).send(errorResponse);
+        return response.status(201).send(errorResponse);
     }
 
     // Get Customer Profile API

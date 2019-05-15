@@ -298,7 +298,7 @@ export class MediaController {
                 response.end(undefined, 'binary');
             }
         } else {
-            return response.status(400).send({ status: 0, message: 'Only allow jpg/jpeg/png format image!' });
+            return response.status(201).send({ status: 0, message: 'Only allow jpg/jpeg/png format image!' });
         }
     }
 }

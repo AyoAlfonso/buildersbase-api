@@ -97,7 +97,7 @@ export class LanguageController {
                     status: 0,
                     message: 'unable to create language',
                 };
-                return response.status(400).send(errorResponse);
+                return response.status(201).send(errorResponse);
             }
         }
     }
@@ -151,7 +151,7 @@ export class LanguageController {
                 status: 0,
                 message: 'unable to list language',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
     // Update Language API
@@ -196,7 +196,7 @@ export class LanguageController {
                 status: 0,
                 message: 'Invalid languageId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const image = languageParam.image;
@@ -243,7 +243,7 @@ export class LanguageController {
                 status: 0,
                 message: 'unable to update language',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -280,7 +280,7 @@ export class LanguageController {
                 status: 0,
                 message: 'Invalid languageId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteLanguage = await this.languageService.delete(language);
@@ -296,7 +296,7 @@ export class LanguageController {
                 status: 0,
                 message: 'unable to delete language',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

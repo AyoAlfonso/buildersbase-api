@@ -244,7 +244,7 @@ export class OrderController {
                 status: 0,
                 message: 'unable to get total order amount',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -290,7 +290,7 @@ export class OrderController {
                 status: 0,
                 message: 'unable to get today order amount',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -360,7 +360,7 @@ export class OrderController {
                 status: 0,
                 message: 'invalid order Id',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         await this.orderLogService.create(updateOrder);
@@ -382,7 +382,7 @@ export class OrderController {
                 status: 0,
                 message: 'unable to updated OrderStatus',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 }

@@ -83,7 +83,7 @@ export class CategoryController {
                 status: 0,
                 message: 'Unable to create the category. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -139,7 +139,7 @@ export class CategoryController {
                 status: 0,
                 message: 'Invalid categoryId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
         categoryId.name = category.name;
         categoryId.image = category.image;
@@ -163,7 +163,7 @@ export class CategoryController {
                 status: 0,
                 message: 'Unable to update the category. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -201,7 +201,7 @@ export class CategoryController {
                 status: 0,
                 message: 'Invalid categoryId',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
 
         const deleteCategory = await this.categoryService.delete(categoryId);
@@ -217,7 +217,7 @@ export class CategoryController {
                 status: 0,
                 message: 'Unable to delete the category. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
@@ -275,7 +275,7 @@ export class CategoryController {
                 status: 0,
                 message: 'Unable to get the category list. ',
             };
-            return response.status(400).send(errorResponse);
+            return response.status(201).send(errorResponse);
         }
     }
 
