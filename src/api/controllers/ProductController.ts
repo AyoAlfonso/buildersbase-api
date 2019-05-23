@@ -233,6 +233,8 @@ export class ProductController {
         newProduct.isActive = product.status;
         newProduct.sortOrder = product.sortOrder;
         newProduct.uniquecode = product.uniquecode;
+        newProduct.image  = product.images.image;
+        console.log('this is pdt img', product.images);
         const saveProduct = await this.productService.create(newProduct);
 
         // save category
@@ -250,16 +252,17 @@ export class ProductController {
         }
 
         // Save products Image
-        const productImage: any = product.image;
-        for (const imageRow of productImage) {
-            const imageData = JSON.stringify(imageRow);
-            const imageResult = JSON.parse(imageData);
-            const newProductImage = new ProductImage();
-            newProductImage.productId = saveProduct.productId;
-            newProductImage.image = imageResult.image;
-            newProductImage.containerName = imageResult.containerName;
-            this.productImageService.create(newProductImage);
-        }
+        // const productImage: any = product.images;
+        // for (const imageRow of productImage) {
+        //     const imageData = JSON.stringify(imageRow);
+        //     console.log('this' + imageData);
+        //     const imageResult = JSON.parse(imageData);
+        //     const newProductImage = new ProductImage();
+        //     newProductImage.productId = saveProduct.productId;
+        //     newProductImage.image = imageResult.image;
+        //     newProductImage.containerName = imageResult.containerName;
+        //     this.productImageService.create(newProductImage);
+        // }
 
         if (saveProduct) {
             const successResponse: any = {

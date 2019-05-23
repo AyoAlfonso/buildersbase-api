@@ -30,7 +30,7 @@ export class AddProductRequest {
     @IsNotEmpty()
     public categoryId: string;
 
-    public image: string;
+    public images: any;
 
     @IsNotEmpty()
     public model: number;

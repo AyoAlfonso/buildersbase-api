@@ -14,6 +14,7 @@ import {BannerService} from '../../services/bannerService';
 import {MAILService} from '../../../auth/mail.services';
 import {classToPlain} from 'class-transformer';
 import {CategoryService} from '../../services/categoryService';
+import {ManufacturerService} from '../../services/manufacturerService';
 import {ProductService} from '../../services/ProductService';
 import arrayToTree from 'array-to-tree';
 import {ProductRelated} from '../../models/ProductRelated';
@@ -29,7 +30,7 @@ import {Contact} from '../../models/Contact';
 @JsonController('/list')
 export class CommonListController {
     constructor(private bannerService: BannerService, private categoryService: CategoryService, private productRelatedService: ProductRelatedService,
-                private productService: ProductService, private productImageService: ProductImageService,
+                private productService: ProductService, private productImageService: ProductImageService, private manufacturerService: ManufacturerService,
                 private customerWishlistService: CustomerWishlistService, private countryService: CountryService, private contactService: ContactService) {
     }
 
@@ -216,7 +217,7 @@ export class CommonListController {
                              @QueryParam('manufacturerId') manufacturerId: string, @QueryParam('categoryId') categoryId: string, @QueryParam('priceFrom') priceFrom: string,
                              @QueryParam('priceTo') priceTo: string, @QueryParam('price') price: number, @QueryParam('condition') condition: number, @QueryParam('count') count: number | boolean, @Req() request: any, @Res() response: any): Promise<any> {
         console.log(keyword);
-        const select = ['product.productId', 'product.sku', 'product.name', 'product.quantity', 'product.description', 'product.price',
+        const select = ['product.productId', 'product.sku', 'product.name', 'product.quantity', 'product.manufacturerId', 'product.description', 'product.price',
             'product.isActive AS isActive', 'product.manufacturerId AS manufacturerId', 'product.location AS location', 'product.minimumQuantity AS minimumQuantity',
             'product.subtractStock', 'product.wishListStatus', 'product.stockStatusId', 'product.shipping', 'product.sortOrder', 'product.condition',
             'product.dateAvailable', 'product.amount', 'product.metaTagTitle', 'product.metaTagDescription', 'product.metaTagKeyword', 'product.discount'];
@@ -266,6 +267,8 @@ export class CommonListController {
             });
             const temp: any = result;
             temp.Images = productImage;
+            const manufacturer = await this.manufacturerService.findOne(result.manufacturerId);
+            temp.manufacturer = manufacturer;
             if (request.header('authorization')) {
                 const userId = jwt.verify(request.header('authorization').split(' ')[1], '123##$$)(***&');
                 const userUniqueId: any = Object.keys(userId).map((key: any) => {
