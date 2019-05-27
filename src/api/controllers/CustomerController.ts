@@ -231,10 +231,9 @@ export class CustomerController {
             data: customerList,
         };
         return response.status(200).send(successResponse);
-
     }
 
-// Delete Customer API
+    // Delete Customer API
     /**
      * @api {delete} /api/customer/delete-customer/:id Delete Customer API
      * @apiGroup Customer
