@@ -63,7 +63,7 @@ export class ManufacturerController {
         // const image = manufacturer.image;
         // if (image) {
         //     const s3 = new AWS.S3();
-            const name = 'https://s3.us-east-2.amazonaws.com/buildersbase-resources/bricks.de6d525b.jpg'
+            const name = 'https://s3.us-east-2.amazonaws.com/buildersbase-resources/bricks.de6d525b.jpg';
             const path = 'manufacturer/';
         //     const base64Data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
         //     const type = image.split(';')[0].split('/')[1];
