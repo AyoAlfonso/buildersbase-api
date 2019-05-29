@@ -45,6 +45,8 @@ export class UpdateProductRequest {
     @IsNotEmpty()
     public location: string;
 
+    public feature: number;
+
     @IsNotEmpty()
     public minimumQuantity: string;
 

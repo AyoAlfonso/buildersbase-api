@@ -378,6 +378,7 @@ export class ProductController {
         updateProduct.condition = product.condition;
         updateProduct.isActive = product.status;
         updateProduct.sortOrder = product.sortOrder;
+        updateProduct.feature = product.feature;
         const saveProduct = await this.productService.create(updateProduct);
 
         // delete previous category
