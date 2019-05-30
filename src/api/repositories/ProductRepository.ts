@@ -16,7 +16,7 @@ import {OrderProduct} from '../models/OrderProduct';
 @EntityRepository(Product)
 export class ProductRepository extends Repository<Product> {
 
-    public async productList(limit: number, offset: number, select: any = [], searchConditions: any = [], whereConditions: any = [], categoryId: any = [], priceFrom: string, priceTo: string, price: number, count: number | boolean): Promise<any> {
+    public async productList(limit: number, offset: number, select: any = [], searchConditions: any = [], whereConditions: any = [], categoryId: any = [], priceFrom: string, priceTo: string, price: number, recently: number,  count: number | boolean): Promise<any> {
         console.log(select);
         const query: any = await this.manager.createQueryBuilder(Product, 'product');
         // Select
@@ -66,6 +66,9 @@ export class ProductRepository extends Repository<Product> {
             query.orderBy('product.price', price === 1 ? 'ASC' : 'DESC');
         }
 
+        if (recently) {
+            query.orderBy('product.created_date', 'DESC');
+        }
         // Limit & Offset
         if (limit && limit > 0) {
             query.limit(limit);

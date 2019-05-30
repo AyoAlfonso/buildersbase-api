@@ -214,12 +214,12 @@ export class CommonListController {
      */
     @Get('/productlist')
     public async productList(@QueryParam('limit') limit: number, @QueryParam('offset') offset: number, @QueryParam('keyword') keyword: string,
-                             @QueryParam('manufacturerId') manufacturerId: string, @QueryParam('categoryId') categoryId: string, @QueryParam('priceFrom') priceFrom: string,
+                             @QueryParam('manufacturerId') manufacturerId: string, @QueryParam('categoryId') categoryId: string, @QueryParam('priceFrom') priceFrom: string, @QueryParam('recently') recently: number,
                              @QueryParam('priceTo') priceTo: string, @QueryParam('price') price: number, @QueryParam('condition') condition: number, @QueryParam('count') count: number | boolean, @Req() request: any, @Res() response: any): Promise<any> {
         console.log(keyword);
         const select = ['product.productId', 'product.sku', 'product.name', 'product.quantity', 'product.manufacturerId', 'product.description', 'product.price',
             'product.isActive AS isActive', 'product.manufacturerId AS manufacturerId', 'product.location AS location', 'product.minimumQuantity AS minimumQuantity',
-            'product.subtractStock', 'product.wishListStatus', 'product.stockStatusId', 'product.shipping', 'product.sortOrder', 'product.condition',
+            'product.subtractStock', 'product.createdDate', 'product.wishListStatus', 'product.stockStatusId', 'product.shipping', 'product.sortOrder', 'product.condition',
             'product.dateAvailable', 'product.amount', 'product.metaTagTitle', 'product.metaTagDescription', 'product.metaTagKeyword', 'product.discount'];
         const searchConditions = [
             {
@@ -250,7 +250,7 @@ export class CommonListController {
             value: categoryId,
         }];
 
-        const productList: any = await this.productService.productList(limit, offset, select, searchConditions, whereConditions, categoryId, priceFrom, priceTo, price, count);
+        const productList: any = await this.productService.productList(limit, offset, select, searchConditions, whereConditions, categoryId, priceFrom, priceTo, price, recently, count);
         console.log(productList);
         if (count) {
             const Response: any = {
@@ -330,7 +330,7 @@ export class CommonListController {
     @Get('/sellerProductlist')
     public async sellerProductList( @QueryParam('limit') limit: number, @QueryParam('offset') offset: number, @QueryParam('keyword') keyword: string,
                                     @QueryParam('manufacturerId') manufacturerId: string, @QueryParam('categoryId') categoryId: string,
-                                    @QueryParam('priceFrom') priceFrom: string, @QueryParam('priceTo') priceTo: string, @QueryParam('price') price: number,
+                                    @QueryParam('priceFrom') priceFrom: string, @QueryParam('priceTo') priceTo: string, @QueryParam('price') price: number, @QueryParam('recently') recently: number,
                                     @QueryParam('condition') condition: number, @QueryParam('count') count: number | boolean, @Req() request: any, @Res() response: any): Promise<any> {
         console.log(keyword);
         const select = ['product.productId', 'product.sku', 'product.name', 'product.quantity', 'product.description', 'product.price',
@@ -351,7 +351,7 @@ export class CommonListController {
             value: categoryId,
         }];
 
-        const productList: any = await this.productService.productList(limit, offset, select, searchConditions, whereConditions, categoryId, priceFrom, priceTo, price, count);
+        const productList: any = await this.productService.productList(limit, offset, select, searchConditions, whereConditions, categoryId, priceFrom, priceTo, price, recently, count);
         console.log(productList);
         if (count) {
             const Response: any = {

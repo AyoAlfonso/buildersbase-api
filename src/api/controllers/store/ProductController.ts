@@ -14,13 +14,15 @@ import {classToPlain} from 'class-transformer';
 import {ProductToCategoryService} from '../../services/ProductToCategoryService';
 import {ProductService} from '../../services/ProductService';
 import {CategoryService} from '../../services/categoryService';
+import {ManufacturerService} from '../../services/manufacturerService';
 import {UpdateFeatureProduct} from './requests/UpdateFeatureProductRequest';
 
 @JsonController('/product-store')
 export class ProductController {
     constructor(private productService: ProductService,
                 private productToCategoryService: ProductToCategoryService,
-                private categoryService: CategoryService) {
+                private categoryService: CategoryService,
+                private manufacturerService: ManufacturerService)  {
     }
 
     // Product Details API
@@ -259,6 +261,17 @@ export class ProductController {
         ];
         const relation = ['productImage'];
         const featureProduct = await this.productService.list(limit, offset, select, relation, whereConditions, search, 0, count);
+
+        const promises = featureProduct.map(async (result: any) => {
+            const ManufacturerData = await this.manufacturerService.findOne({
+                where: {
+                    manufacturerId: result.manufacturerId,
+                },
+            });
+            result.manufacturerData = ManufacturerData;
+            return result;
+        });
+       await Promise.all(promises);
         const successResponse: any = {
             status: 1,
             message: 'Successfully get feature product List',

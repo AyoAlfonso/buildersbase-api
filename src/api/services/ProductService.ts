@@ -29,7 +29,7 @@ export class ProductService {
     }
 
     // product list
-    public list(limit: number, offset: number, select: any = [], relation: any = [], whereConditions: any = [], search: any = [], price: number, count: number | boolean): Promise<any> {
+    public list(limit: number, offset: number, select: any = [], relation: any = [], whereConditions: any = [], search: any = [], price: number, recently: number, count: number | boolean): Promise<any> {
         const condition: any = {};
 
         if (select && select.length > 0) {
@@ -107,8 +107,8 @@ export class ProductService {
     }
 
     // product list
-    public async productList(limit: number, offset: number, select: any = [], searchConditions: any = [], whereConditions: any = [], categoryId: any = [], priceFrom: string, priceTo: string, price: number, count: number | boolean): Promise<any> {
-        return await this.productRepository.productList(limit, offset, select, searchConditions, whereConditions, categoryId, priceFrom, priceTo, price, count);
+    public async productList(limit: number, offset: number, select: any = [], searchConditions: any = [], whereConditions: any = [], categoryId: any = [], priceFrom: string, priceTo: string, price: number, recently: number, count: number | boolean): Promise<any> {
+        return await this.productRepository.productList(limit, offset, select, searchConditions, whereConditions, categoryId, priceFrom, priceTo, price, recently, count);
     }
 
     // Recent selling product
