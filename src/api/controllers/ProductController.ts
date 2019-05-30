@@ -59,7 +59,7 @@ export class ProductController {
      */
     @Get('/productlist')
     @Authorized()
-    public async productList(@QueryParam('limit') limit: number, @QueryParam('offset') offset: number, @QueryParam('keyword') keyword: string, @QueryParam('sku') sku: string, @QueryParam('status') status: string, @QueryParam('price') price: number, @QueryParam('count') count: number | boolean, @Res() response: any): Promise<Product> {
+    public async productList(@QueryParam('limit') limit: number, @QueryParam('offset') offset: number, @QueryParam('keyword') keyword: string, @QueryParam('sku') sku: string, @QueryParam('status') status: string, @QueryParam('price') price: number, @QueryParam('recently') recently: number,  @QueryParam('count') count: number | boolean, @Res() response: any): Promise<Product> {
         console.log(keyword);
         const select = ['productId', 'sku', 'name', 'quantity', 'price', 'image', 'imagePath', 'isActive'];
 
@@ -82,7 +82,7 @@ export class ProductController {
                 value: status,
             },
         ];
-        const productList: any = await this.productService.list(limit, offset, select, relation, WhereConditions, 0, price, count);
+        const productList: any = await this.productService.list(limit, offset, select, relation, WhereConditions, 0, price, recently,  count);
         console.log('productList' + productList);
         const successResponse: any = {
             status: 1,
@@ -461,7 +461,7 @@ export class ProductController {
             },
         ];
 
-        const productDetail: any = await this.productService.list(0, 0, select, relation, WhereConditions, 0, 0, 0);
+        const productDetail: any = await this.productService.list(0, 0, select, relation, WhereConditions, 0, 0, 0, 0);
         const productDetails: any = classToPlain(productDetail);
         const promises = productDetails.map(async (result: any) => {
             const productToCategory = await this.productToCategoryService.findAll({
