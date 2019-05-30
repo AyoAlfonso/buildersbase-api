@@ -54,7 +54,7 @@ export class ProductController {
             },
         ];
 
-        const productDetail: any = await this.productService.list(0, 0, select, relation, WhereConditions, 0, 0, 0);
+        const productDetail: any = await this.productService.list(0, 0, select, relation, WhereConditions, 0, 0 , 0, 0);
         const productDetails: any = classToPlain(productDetail);
         const promises = productDetails.map(async (result: any) => {
             const productToCategory = await this.productToCategoryService.findAll({
@@ -117,7 +117,7 @@ export class ProductController {
             },
         ];
 
-        const productDetail: any = await this.productService.list(0, 0, select, relation, WhereConditions, 0, 0, 0);
+        const productDetail: any = await this.productService.list(0, 0, select, relation, WhereConditions, 0, 0,  0, 0);
         const productDetails: any = classToPlain(productDetail);
         const promises = productDetails.map(async (result: any) => {
             const productToCategory = await this.productToCategoryService.findAll({
@@ -260,7 +260,7 @@ export class ProductController {
             },
         ];
         const relation = ['productImage'];
-        const featureProduct = await this.productService.list(limit, offset, select, relation, whereConditions, search, 0, count);
+        const featureProduct = await this.productService.list(limit, offset, select, relation, whereConditions, search, 0, 0, count);
 
         const promises = featureProduct.map(async (result: any) => {
             const ManufacturerData = await this.manufacturerService.findOne({
