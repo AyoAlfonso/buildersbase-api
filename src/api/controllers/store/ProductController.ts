@@ -226,7 +226,7 @@ export class ProductController {
     @Get('/featureproduct-list')
     public async featureProductList(@QueryParam('limit') limit: number, @QueryParam('offset') offset: number, @QueryParam('keyword') keyword: string, @QueryParam('sku') sku: string, @QueryParam('count') count: number | boolean, @Req() request: any, @Res() response: any): Promise<any> {
 
-        const select = ['productId', 'sku', 'upc', 'name', 'description', 'location', 'minimumQuantity',
+        const select = ['productId', 'sku', 'upc', 'name', 'description', 'location', 'image', 'minimumQuantity',
             'quantity', 'subtractStock', 'metaTagTitle', 'manufacturerId', 'stockStatusId',
             'shipping', 'dateAvailable', 'sortOrder', 'price', 'isActive'];
         const whereConditions = [
