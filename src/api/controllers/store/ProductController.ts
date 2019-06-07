@@ -42,7 +42,7 @@ export class ProductController {
      */
     @Get('/productdetail/:id')
     public async productDetail(@Param('id') id: number, @Res() response: any): Promise<any> {
-        const select = ['productId', 'sku', 'upc', 'name', 'description', 'location', 'minimumQuantity', 'quantity', 'subtractStock', 'metaTagTitle', 'manufacturerId', 'stockStatusId', 'shipping', 'dateAvailable', 'sortOrder', 'price', 'isActive'];
+        const select = ['productId', 'sku', 'upc', 'name', 'description', 'image', 'location', 'minimumQuantity', 'quantity', 'subtractStock', 'metaTagTitle', 'manufacturerId', 'stockStatusId', 'shipping', 'dateAvailable', 'sortOrder', 'price', 'isActive'];
 
         const relation = ['productImage'];
 
@@ -73,9 +73,11 @@ export class ProductController {
                 const results = Promise.all(category);
                 return results;
             });
+            const ManufacturerData = await this.manufacturerService.findOne({where: { manufacturerId: result.manufacturerId}});
             const dd: any = result;
             dd.Category = productToCategory;
-            console.log('dd' + dd);
+            dd.manufacturerData = ManufacturerData;
+            console.log('dd' + dd + JSON.stringify(ManufacturerData));
             return dd;
         });
         // wait until all promises resolve

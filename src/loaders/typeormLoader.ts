@@ -25,6 +25,7 @@ export const typeormLoader: MicroframeworkLoader = async (settings: Microframewo
         password: env.db.password,
         database: env.db.database,
         synchronize: env.db.synchronize,
+        connectTimeout  : 60 * 60 * 1000,
         logging: true,
         // logging: {
         //     logQueries: true,

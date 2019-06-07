@@ -37,7 +37,6 @@ export class ProductRepository extends Repository<Product> {
                 } else if (operator === 'andWhere' && table.value !== undefined && table.value !== '') {
                     query.andWhere(table.name + ' = ' + table.value);
                 }
-
             });
         }
 

@@ -333,7 +333,7 @@ export class CommonListController {
                                     @QueryParam('priceFrom') priceFrom: string, @QueryParam('priceTo') priceTo: string, @QueryParam('price') price: number, @QueryParam('recently') recently: number,
                                     @QueryParam('condition') condition: number, @QueryParam('count') count: number | boolean, @Req() request: any, @Res() response: any): Promise<any> {
         console.log(keyword);
-        const select = ['product.productId', 'product.sku', 'product.name', 'product.quantity', 'product.description', 'product.price',
+        const select = ['product.productId', 'product.sku', 'product.name', 'product.image', 'product.quantity', 'product.description', 'product.price',
             'product.isActive AS isActive', 'product.manufacturerId AS manufacturerId', 'product.location AS location', 'product.minimumQuantity AS minimumQuantity',
             'product.subtractStock', 'product.wishListStatus', 'product.stockStatusId', 'product.shipping', 'product.sortOrder', 'product.condition',
             'product.dateAvailable', 'product.amount', 'product.metaTagTitle', 'product.metaTagDescription', 'product.metaTagKeyword', 'product.discount', 'product.uniquecode'];
@@ -366,8 +366,10 @@ export class CommonListController {
                 select: ['productId', 'image', 'containerName'],
                 where: {productId: result.productId},
             });
+            const ManufacturerData = await this.manufacturerService.findOne({where: { manufacturerId}});
             const temp: any = result;
             temp.Images = productImage;
+            temp.manufacturerData = ManufacturerData;
             if (request.header('authorization')) {
                 const userId = jwt.verify(request.header('authorization').split(' ')[1], '123##$$)(***&');
                 const userUniqueId: any = Object.keys(userId).map((key: any) => {
