@@ -269,7 +269,7 @@ export class CommonListController {
             temp.Images = productImage;
             const manufacturer = await this.manufacturerService.findOne(result.manufacturerId);
             temp.manufacturer = manufacturer;
-            if (request.header('authorization')) {
+            if (request.header('authorization').split(' ')[1] !== 'undefined') {
                 const userId = jwt.verify(request.header('authorization').split(' ')[1], '123##$$)(***&');
                 const userUniqueId: any = Object.keys(userId).map((key: any) => {
                     return [(key), userId[key]];
@@ -292,7 +292,7 @@ export class CommonListController {
             return temp;
         });
         const finalResult = await Promise.all(promises);
-
+        console.log(finalResult);
         const successResponse: any = {
             status: 1,
             message: 'Successfully got the complete list of products. ',

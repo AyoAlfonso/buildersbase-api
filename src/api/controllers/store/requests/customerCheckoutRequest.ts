@@ -29,18 +29,18 @@ export class CustomerCheckoutRequest {
     @IsString()
     public shippingCity: string;
 
-    @IsNotEmpty({
-        message: 'Shipping Post Code is required',
-    })
+    // @IsNotEmpty({
+    //     message: 'Shipping Post Code is required',
+    // })
     public shippingPostCode: number;
     @IsNotEmpty({
         message: 'Shipping Country is required',
     })
     @IsString()
     public shippingCountry: string;
-    @IsNotEmpty({
-        message: 'Shipping Zone is required',
-    })
+    // @IsNotEmpty({
+    //     message: 'Shipping Zone is required',
+    // })
     public shippingZone: string;
 
     @IsNotEmpty({

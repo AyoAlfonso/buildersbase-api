@@ -146,7 +146,7 @@ export class CustomerOrderController {
         newOrderTotal.orderId = orderData.orderId;
         newOrderTotal.value = totalAmount;
         await this.orderTotalService.createOrderTotalData(newOrderTotal);
-        MAILService.adminOrderMail(orderData, productDetailData);
+        // MAILService.adminOrderMail(orderData, productDetailData);
         const sendMailRes = MAILService.customerOrderMail(orderData, productDetailData);
         if (sendMailRes) {
             const successResponse: any = {
