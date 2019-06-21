@@ -10,6 +10,7 @@
 
 import { Application } from 'express';
 import express from 'express';
+// import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import { MicroframeworkLoader, MicroframeworkSettings } from 'microframework-w3tec';
 import { useExpressServer } from 'routing-controllers';
@@ -21,6 +22,13 @@ import { env } from '../env';
 export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSettings | undefined) => {
     if (settings) {
         const connection = settings.getData('connection');
+        // const options:cors.CorsOptions = {
+        //     allowedHeaders: ["Origin", "X-Requested-With", 'Content-Type', 'Accept', 'X-Access-Token'],
+        //     credentials: true,
+        //     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+        //     origin: '*',
+        //     preflightContinue: false
+        //   };
 
         /**
          * We create a new express server instance.
@@ -32,8 +40,10 @@ export const expressLoader: MicroframeworkLoader = (settings: MicroframeworkSett
         //     res.header('Access-Control-Allow-Origin', '*');
         //     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
         //     res.header('Access-Control-Allow-Headers', 'Content-Type');
+        //     res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
         //     next();
         // });
+        // app.use(cors());
         app.use(bodyParser.urlencoded({extended: true}));
         app.use(bodyParser.json({limit: '50mb'}));
         const expressApp: Application = useExpressServer(app, {
