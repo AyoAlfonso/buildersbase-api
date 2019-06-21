@@ -20,8 +20,8 @@ import arrayToTree from 'array-to-tree';
 import {ProductRelated} from '../../models/ProductRelated';
 import {ProductRelatedService} from '../../services/ProductRelatedService';
 import {ProductImageService} from '../../services/ProductImageService';
-import {CustomerWishlistService} from '../../services/CustomerWishlistService';
-import jwt from 'jsonwebtoken';
+// import {CustomerWishlistService} from '../../services/CustomerWishlistService';
+// import jwt from 'jsonwebtoken';
 import {CountryService} from '../../services/countryService';
 import {ContactService} from '../../services/ContactService';
 import {ContactRequest} from './requests/ContactRequest';
@@ -31,7 +31,7 @@ import {Contact} from '../../models/Contact';
 export class CommonListController {
     constructor(private bannerService: BannerService, private categoryService: CategoryService, private productRelatedService: ProductRelatedService,
                 private productService: ProductService, private productImageService: ProductImageService, private manufacturerService: ManufacturerService,
-                private customerWishlistService: CustomerWishlistService, private countryService: CountryService, private contactService: ContactService) {
+                private countryService: CountryService, private contactService: ContactService) {
     }
 
     // Banner List API
@@ -269,26 +269,26 @@ export class CommonListController {
             temp.Images = productImage;
             const manufacturer = await this.manufacturerService.findOne(result.manufacturerId);
             temp.manufacturer = manufacturer;
-            if (request.header('authorization').split(' ')[1] !== 'undefined') {
-                const userId = jwt.verify(request.header('authorization').split(' ')[1], '123##$$)(***&');
-                const userUniqueId: any = Object.keys(userId).map((key: any) => {
-                    return [(key), userId[key]];
-                });
-                console.log( userUniqueId[0][1]);
-                const wishStatus = await this.customerWishlistService.findOne({
-                    where: {
-                        productId: result.productId,
-                        customerId: userUniqueId[0][1] ,
-                    } ,
-                });
-                if (wishStatus) {
-                    result.wishListStatus = 1;
-                    await this.productService.create(result);
-                }
-            } else {
-                result.wishListStatus = 0;
-                await this.productService.create(result);
-            }
+            // if (request.header('authorization').split(' ')[1] !== 'undefined') {
+            //     const userId = jwt.verify(request.header('authorization').split(' ')[1], '123##$$)(***&');
+            //     const userUniqueId: any = Object.keys(userId).map((key: any) => {
+            //         return [(key), userId[key]];
+            //     });
+            //     console.log( userUniqueId[0][1]);
+            //     const wishStatus = await this.customerWishlistService.findOne({
+            //         where: {
+            //             productId: result.productId,
+            //             customerId: userUniqueId[0][1] ,
+            //         } ,
+            //     });
+            //     if (wishStatus) {
+            //         result.wishListStatus = 1;
+            //         await this.productService.create(result);
+            //     }
+            // } else {
+            //     result.wishListStatus = 0;
+            //     await this.productService.create(result);
+            // }
             return temp;
         });
         const finalResult = await Promise.all(promises);
@@ -370,26 +370,26 @@ export class CommonListController {
             const temp: any = result;
             temp.Images = productImage;
             temp.manufacturerData = ManufacturerData;
-            if (request.header('authorization')) {
-                const userId = jwt.verify(request.header('authorization').split(' ')[1], '123##$$)(***&');
-                const userUniqueId: any = Object.keys(userId).map((key: any) => {
-                    return [(key), userId[key]];
-                });
-                console.log( userUniqueId[0][1]);
-                const wishStatus = await this.customerWishlistService.findOne({
-                    where: {
-                        productId: result.productId,
-                        customerId: userUniqueId[0][1] ,
-                    } ,
-                });
-                if (wishStatus) {
-                    result.wishListStatus = 1;
-                    await this.productService.create(result);
-                }
-            } else {
-                result.wishListStatus = 0;
-                await this.productService.create(result);
-            }
+            // if (request.header('authorization')) {
+            //     const userId = jwt.verify(request.header('authorization').split(' ')[1], '123##$$)(***&');
+            //     const userUniqueId: any = Object.keys(userId).map((key: any) => {
+            //         return [(key), userId[key]];
+            //     });
+            //     console.log( userUniqueId[0][1]);
+            //     const wishStatus = await this.customerWishlistService.findOne({
+            //         where: {
+            //             productId: result.productId,
+            //             customerId: userUniqueId[0][1] ,
+            //         } ,
+            //     });
+            //     if (wishStatus) {
+            //         result.wishListStatus = 1;
+            //         await this.productService.create(result);
+            //     }
+            // } else {
+            //     result.wishListStatus = 0;
+            //     await this.productService.create(result);
+            // }
             return temp;
         });
         const finalResult = await Promise.all(promises);
