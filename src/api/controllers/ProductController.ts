@@ -214,6 +214,16 @@ export class ProductController {
     @Authorized()
     public async addProduct(@Body({validate: true}) product: AddProductRequest, @Res() response: any): Promise<any> {
         console.log(product);
+        const makeid = function (length: number) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+               result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+         }
+   
         const newProduct: any = new Product();
         newProduct.name = product.productName;
         newProduct.description = product.productDescription;
@@ -229,14 +239,17 @@ export class ProductController {
         newProduct.dateAvailable = product.dateAvailable;
         newProduct.metaTagTitle = product.metaTagTitle;
         newProduct.condition = product.condition;
-        newProduct.manufacturerId = product.manufactureId;
+
+        newProduct.manufacturerId = product.manufactureId || 13;
         newProduct.isActive = product.status;
         newProduct.sortOrder = product.sortOrder;
-        newProduct.uniquecode = product.uniquecode;
-        newProduct.image  = product.images.image;
-        console.log('this is pdt img', product.images);
-        const saveProduct = await this.productService.create(newProduct);
 
+        newProduct.uniquecode = product.uniquecode || makeid(8);
+        
+        newProduct.image  = product.singleimage ? product.singleimage.image :  product.images ?   product.images : null ;
+        // newProduct.image = 
+        // console.log('this is pdt img', product.images);
+        const saveProduct = await this.productService.create(newProduct);
         // save category
         if (product.categoryId) {
             const category = product.categoryId;

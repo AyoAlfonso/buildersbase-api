@@ -32,6 +32,8 @@ export class AddProductRequest {
 
     public images: any;
 
+    public singleimage: any;
+
     @IsNotEmpty()
     public model: number;
 
@@ -64,11 +66,9 @@ export class AddProductRequest {
 
     @IsNotEmpty()
     public status: number;
-
-    @IsNotEmpty()
+ 
     public uniquecode: string;
 
-    @IsNotEmpty()
     public manufactureId: number;
 
     @IsNotEmpty()

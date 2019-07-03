@@ -350,11 +350,9 @@ export class OrderController {
      * HTTP/1.1 500 Internal Server Error
      */
     @Post('/order-change-status')
-    @Authorized()
+    // @Authorized()
     public async orderChangeStatus(@Body({ validate: true }) orderChangeStatus: UpdateOrderChangeStatus, @Res() response: any): Promise<any> {
-
         const updateOrder = await this.orderService.findOrder(orderChangeStatus.orderId);
-        console.log(updateOrder);
         if (!updateOrder) {
             const errorResponse: any = {
                 status: 0,
@@ -362,7 +360,7 @@ export class OrderController {
             };
             return response.status(201).send(errorResponse);
         }
-
+        console.log('smoething is here2' + updateOrder);
         await this.orderLogService.create(updateOrder);
         console.log(updateOrder);
 
